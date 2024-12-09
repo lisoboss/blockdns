@@ -1,0 +1,31 @@
+[package]
+name = "blockdns"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bytes = "1.9.0"
+tokio = { version = "1.28.2", features = [
+    "macros",
+    "sync",
+    "rt-multi-thread",
+    "rt",
+    "net",
+    "io-util",
+    "time",
+] }
+
+[dev-dependencies]
+tokio = { version = "1.28.2", features = ["full"] }
+
+[profile.release]
+# 开启链接时优化(Link Time Optimization)
+lto = true
+# 开启代码优化级别
+opt-level = 3
+# 开启代码大小优化
+codegen-units = 1
+# 启用panic时直接终止,减少二进制大小
+panic = "abort"
+# 去除调试信息,减少文件大小
+strip = true
